@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let guessCount = 4;
   let password = '';
 
-  let start = document.getElementById('start');
+  const start = document.getElementById('start');
   start.addEventListener('click', () => {
     toggleClasses(document.getElementById('start-screen'), 'hide', 'show');
     toggleClasses(document.getElementById('game-screen'), 'hide', 'show');
@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startGame() {
     // get random words and append them to the DOM
-    let wordList = document.getElementById("word-list");
-    let randomWords = getRandomValues(words);
+    const wordList = document.getElementById("word-list");
+    const randomWords = getRandomValues(words);
     randomWords.forEach(word => {
-      let li = document.createElement("li");
+      const li = document.createElement("li");
       li.innerText = word;
       wordList.appendChild(li);
     });
@@ -42,13 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
     wordList.addEventListener('click', updateGame);
   }
 
-  let getRandomValues = (array, numVals=wordCount) => shuffle(array).slice(0,numVals);
+  const getRandomValues = (array, numVals=wordCount) => shuffle(array).slice(0,numVals);
 
   function shuffle(array) {
-    let arrayCopy = array.slice();
+    const arrayCopy = array.slice();
     for (let idx1 = arrayCopy.length - 1; idx1 > 0; idx1--) {
       // generate a random index between 0 and idx1 (inclusive)
-      let idx2 = Math.floor(Math.random() * (idx1 + 1));
+      const idx2 = Math.floor(Math.random() * (idx1 + 1));
 
       // swap elements at idx1 and idx2
       [arrayCopy[idx1], arrayCopy[idx2]] = [arrayCopy[idx2], arrayCopy[idx1]];
@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateGame(e) {
     if (e.target.tagName === "LI" && !e.target.classList.contains("disabled")) {
       // grab guessed word, check it against password, update view
-      let guess = e.target.innerText;
-      let similarityScore = compareWords(guess, password);
+      const guess = e.target.innerText;
+      const similarityScore = compareWords(guess, password);
       e.target.classList.add("disabled");
       e.target.innerText = `${e.target.innerText} --> Matching Letters: ${similarityScore}`;
       setGuessCount(guessCount - 1);
